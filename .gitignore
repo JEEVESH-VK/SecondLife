@@ -1,0 +1,14 @@
+# Environment secret keys
+.env
+backend/.env
+
+# Python caches & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# Database files
+*.db
+backend/secondlife.db

@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecondLife – Give E-Waste a New Life</title>
+<style>
+:root {
+  --g-dark: #072219;
+  --g: #0d3c2e;
+  --g-light: #165b47;
+  --e: #10b981;
+  --e-hover: #059669;
+  --t: #ecfdf5;
+  --bg: #f8faf9;
+  --card: #ffffff;
+  --card-hover: #ffffff;
+  --tx: #111827;
+  --tx-muted: #4b5563;
+  --tx-subtle: #6b7280;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --am: #d97706;
+  --am-bg: #fffbe6;
+  --am-border: #fef08a;
+  --rd: #dc2626;
+  --rd-bg: #fef2f2;
+  --gn: #059669;
+  --gn-bg: #ecfdf5;
+  --gn-border: #a7f3d0;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 25px -5px rgba(13, 60, 46, 0.1), 0 8px 10px -6px rgba(13, 60, 46, 0.05);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  color: var(--tx);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+a { color: var(--e); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--e-hover); }
+
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+/* Navbar */
+nav {
+  background: var(--g-dark);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
+}
+.brand {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none !important;
+}
+.brand-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+.brand-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+.nav-menu { display: flex; align-items: center; gap: 4px; }
+nav a.nav-link {
+  color: #a7f3d0;
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+nav a.nav-link:hover { color: #fff; background: rgba(255,255,255,0.08); text-decoration: none; }
+nav a.nav-link.on { color: #fff; background: rgba(255,255,255,0.15); font-weight: 600; text-decoration: none; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.btn-primary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+.btn-secondary {
+  background: #fff;
+  color: var(--tx);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover {
+  background: var(--bg);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+.btn-ai {
+  background: linear-gradient(135deg, #0d3c2e 0%, #165b47 100%);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+.btn-ai:hover { background: #072219; color: #fff; transform: translateY(-1px); }
+.btn-sm { padding: 7px 14px; font-size: 13px; border-radius: 8px; }
+.btn-dng { background: transparent; color: var(--rd); border: 1px solid var(--rd-bg); }
+.btn-dng:hover { background: var(--rd-bg); }
+
+/* Eyebrow & Badges */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.eyebrow svg { width: 14px; height: 14px; fill: currentColor; }
+
+.gradient-text {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  background: radial-gradient(circle at 80% 20%, #165b47 0%, #0d3c2e 50%, #072219 100%);
+  color: #fff;
+  padding: 80px 0 72px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+.hero h1 {
+  color: #fff;
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.hero p {
+  color: #a7f3d0;
+  font-size: 1.15rem;
+  max-width: 52ch;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.hero-cta-group { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Repurpose Engine Widget Visual */
+.engine-widget {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.engine-step {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.engine-arrow {
+  text-align: center;
+  color: #34d399;
+  font-size: 18px;
+  margin: -4px 0 8px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+/* Cards & Layout */
+section.s { padding: 56px 0; }
+.grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card.link { cursor: pointer; }
+.card.link:hover {
+  border-color: #a7f3d0;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.mu { color: var(--tx-muted); font-size: 14px; }
+.subtle { color: var(--tx-subtle); font-size: 13px; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: var(--t);
+  color: var(--g);
+  font-size: 12px;
+  font-weight: 600;
+  margin: 2px 4px 2px 0;
+}
+.pill.gn { background: var(--gn-bg); color: var(--gn); border: 1px solid var(--gn-border); }
+.pill.m { background: var(--rd-bg); color: var(--rd); border: 1px solid #fecaca; }
+.pill.p { background: var(--am-bg); color: var(--am); border: 1px solid var(--am-border); }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.status-badge.ready { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+.status-badge.almost { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.status-badge.partial { background: #f3f4f6; color: #374151; border: 1px solid #e5e7eb; }
+
+/* Progress Bars */
+.bar { height: 8px; border-radius: 99px; background: #e2e8f0; overflow: hidden; margin: 10px 0; }
+.bar i { display: block; height: 100%; background: var(--e); transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.bar.hi i { background: var(--gn); }
+.bar.lo i { background: var(--am); }
+.bar.zero i { background: #cbd5e1; }
+
+.score { font-size: 28px; font-weight: 800; color: var(--g-dark); font-variant-numeric: tabular-nums; }
+.top-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+/* Form inputs */
+input, select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--tx);
+  width: 100%;
+  transition: all 0.2s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--e);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+.form {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.2fr 2fr 0.8fr 1.2fr auto;
+  align-items: end;
+}
+.form label { font-size: 13px; font-weight: 600; color: var(--tx-muted); display: grid; gap: 6px; }
+@media (max-width: 840px) {
+  .form { grid-template-columns: 1fr 1fr; }
+  .form .btn { grid-column: 1 / -1; }
+}
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+td, th { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; font-size: 14px; }
+th { color: var(--tx-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; background: #f8fafc; }
+tr:last-child td { border-bottom: 0; }
+
+.empty { text-align: center; padding: 56px 20px; color: var(--tx-muted); }
+.two { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 768px) { .two { grid-template-columns: 1fr; } }
+
+/* Toast Notifications */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--g-dark);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 99px;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.toast.err { background: var(--rd); }
+
+/* Dropzone Upload */
+.dropzone {
+  border: 2px dashed var(--border-hover);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.dropzone:hover, .dropzone.dragover {
+  border-color: var(--e);
+  background: var(--t);
+}
+
+/* Step Checklist */
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  margin: 8px 0;
+  border: 1px solid var(--border);
+}
+.step-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--e);
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+/* Tab Filters */
+.badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 99px;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  font: 500 13px inherit;
+  color: var(--tx-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-btn:hover { background: #e2e8f0; }
+.tab-btn.on { background: var(--g-dark); color: #fff; border-color: var(--g-dark); font-weight: 600; }
+
+.safety-box {
+  background: #fffbe6;
+  border: 1px solid var(--am-border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-top: 20px;
+}
+.safety-box h4 { color: #92400e; margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
+
+/* Analysis Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 34, 25, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255,255,255,0.15);
+  border-top-color: #34d399;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Process Steps 01, 02, 03 */
+.step-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+.step-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #34d399;
+  margin-bottom: 12px;
+}
+
+:focus-visible { outline: 2px solid var(--e); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#/">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+      </div>
+      SecondLife
+    </a>
+    <div class="nav-menu">
+      <a href="#/" class="nav-link" data-r="home">Home</a>
+      <a href="#/inventory" class="nav-link" data-r="inventory">Inventory</a>
+      <a href="#/snap" class="nav-link" data-r="snap">Snap & Match</a>
+      <a href="#/results" class="nav-link" data-r="results">Projects</a>
+      <a href="#/dashboard" class="nav-link" data-r="dashboard">Impact</a>
+    </div>
+    <div>
+      <button class="btn btn-primary btn-sm" onclick="findMyProjectsTransition()">Find What I Can Build →</button>
+    </div>
+  </div>
+</nav>
+
+<main id="app"></main>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function api(path, options = {}) {
+  const res = await fetch('/api' + path, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options
+  });
+  if (!res.ok) {
+    let err = {};
+    try { err = await res.json(); } catch {}
+    const msg = Array.isArray(err.detail) ? err.detail.map(x => x.msg).join(', ') : err.detail || res.statusText;
+    throw new Error(msg);
+  }
+  return res.status === 204 ? null : res.json();
+}
+
+function toast(msg, isErr = false) {
+  const t = document.createElement('div');
+  t.className = 'toast' + (isErr ? ' err' : '');
+  t.innerHTML = `<span>${isErr ? '⚠️' : '✓'}</span> <span>${esc(msg)}</span>`;
+  document.body.append(t);
+  setTimeout(() => t.remove(), 2800);
+}
+
+const formatKg = g => g >= 1000 ? (g / 1000).toFixed(2) + ' kg' : g + ' g';
+const formatInr = n => '₹' + Math.round(n).toLocaleString('en-IN');
+const renderBar = score => `<div class="bar ${score >= 80 ? 'hi' : score < 40 ? 'lo' : ''}" role="progressbar" aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100"><i style="width:${score}%"></i></div>`;
+const showLoading = () => $('#app').innerHTML = '<div class="wrap s" style="padding-top:40px"><p class="mu" style="text-align:center;padding:60px 0;">Loading SecondLife workspace…</p></div>';
+const showError = err => $('#app').innerHTML = `<div class="wrap s" style="padding-top:40px"><div class="card"><h3>Unable to connect</h3><p>${esc(err.message)}</p><p class="mu">Ensure the FastAPI backend server is running on port 8000, then refresh.</p></div></div>`;
+
+function findMyProjectsTransition() {
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  overlay.innerHTML = `
+    <div class="spinner"></div>
+    <h3 id="t-msg" style="color:#fff;font-size:22px">Scanning component inventory…</h3>
+    <p class="mu" style="color:#a7f3d0">Comparing requirements against low-voltage reuse projects</p>
+  `;
+  document.body.append(overlay);
+
+  setTimeout(() => { $('#t-msg').textContent = 'Calculating deterministic feasibility scores…'; }, 400);
+  setTimeout(() => { $('#t-msg').textContent = 'Finding best second lives for your hardware…'; }, 800);
+  setTimeout(() => {
+    overlay.remove();
+    location.hash = '#/results';
+  }, 1100);
+}
+
+// Route: Landing Page
+async function home() {
+  const [projects, components] = await Promise.all([api('/projects'), api('/components')]);
+  $('#app').innerHTML = `
+    <div class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">
+              <svg viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+              AI-ASSISTED E-WASTE REPURPOSING
+            </div>
+            <h1>Give Your E-Waste <span class="gradient-text">a Second Life.</span></h1>
+            <p>Turn unused electronic components into meaningful projects instead of letting them become waste.</p>
+            <div class="hero-cta-group">
+              <button class="btn btn-primary" onclick="findMyProjectsTransition()">Find What I Can Build →</button>
+              <a class="btn btn-ai" href="#/snap">📷 Snap & Match (AI)</a>
+              <a class="btn btn-secondary" href="#/results">Explore Projects</a>
+            </div>
+          </div>
+
+          <!-- Second Life Repurpose Engine Visual -->
+          <div class="engine-widget">
+            <div style="font-size:12px;font-weight:700;color:#34d399;letter-spacing:0.05em;margin-bottom:12px">REPURPOSE ENGINE VISUALIZATION</div>
+            
+            <div class="engine-step">
+              <div class="subtle" style="color:#a7f3d0;font-size:11px;font-weight:700;margin-bottom:4px">01 UNUSED HARDWARE IN DRAWER</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <span class="pill gn">Arduino Uno</span>
+                <span class="pill gn">Ultrasonic Sensor</span>
+                <span class="pill gn">Servo Motor</span>
+                <span class="pill gn">LED</span>
+              </div>
+            </div>
+
+            <div class="engine-arrow">↓ AI MATCHING ENGINE ↓</div>
+
+            <div class="engine-step" style="border-color:#34d399">
+              <div class="top-row">
+                <span class="status-badge ready">READY TO BUILD</span>
+                <span style="font-size:18px;font-weight:800;color:#34d399">100% FEASIBLE</span>
+              </div>
+              <h3 style="color:#fff;margin-top:6px">Smart Automatic Dustbin</h3>
+              <div class="subtle" style="color:#a7f3d0">All 4 required component types available in full</div>
+            </div>
+
+            <div class="engine-step" style="background:rgba(16, 185, 129, 0.15);border-color:#10b981;margin-bottom:0">
+              <div class="top-row" style="color:#fff">
+                <span>♻️ <b>250g</b> E-Waste Reused</span>
+                <span>💰 <b>₹0</b> Extra Cost</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Problem Section -->
+    <section class="s">
+      <div class="wrap">
+        <div class="two" style="align-items:center">
+          <div class="card" style="background:#f0fdf4;border-color:#bbf7d0;padding:36px">
+            <div style="font-size:clamp(3rem, 6vw, 4.5rem);font-weight:800;color:var(--g);line-height:1">62M+</div>
+            <div style="font-size:18px;font-weight:700;color:var(--g-light);margin-top:8px">TONNES</div>
+            <p class="mu" style="margin-top:12px">of e-waste generated worldwide annually, with only 22.3% formally recycled (UN Global E-waste Monitor 2024).</p>
+          </div>
+          <div>
+            <h2>Parts in drawers are not waste yet.</h2>
+            <p style="font-size:1.1rem;color:var(--tx-muted)">Microcontrollers, sensors, and motors sitting in unused starter kits often work perfectly. SecondLife indexes your drawer inventory against <b>${projects.length} curated low-voltage projects</b>, calculates instant feasibility, and estimates e-waste reduction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-Step Process -->
+    <section class="s" style="background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div class="wrap">
+        <div style="text-align:center;max-width:600px;margin:0 auto 40px">
+          <h2>How SecondLife Works</h2>
+          <p class="mu">Transforming idle components into completed projects in three steps.</p>
+        </div>
+
+        <div class="grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>IDENTIFY</h3>
+            <p class="mu">Tell us what components you have manually or scan them using AI photo recognition.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>MATCH</h3>
+            <p class="mu">Our engine scores projects into <b>Ready to Build</b>, <b>Almost There</b>, or <b>Partial Match</b>.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>IMPACT</h3>
+            <p class="mu">See how much electronic waste stays in circulation and project your scaled sustainability impact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Snap & Match Showcase -->
+    <section class="s">
+      <div class="wrap">
+        <div class="card" style="background:linear-gradient(135deg, #072219 0%, #0d3c2e 100%);color:#fff;padding:40px">
+          <div class="two" style="align-items:center">
+            <div>
+              <div class="eyebrow" style="background:rgba(255,255,255,0.1);color:#34d399;border-color:rgba(255,255,255,0.2)">
+                NOT SURE WHAT YOU HAVE?
+              </div>
+              <h2 style="color:#fff;font-size:2.2rem;margin-bottom:16px">Show us your electronic components.</h2>
+              <p style="color:#a7f3d0;font-size:1.1rem;margin-bottom:24px">Take a photo of your workbench components and let our AI vision engine identify parts automatically.</p>
+              <a class="btn btn-primary" href="#/snap" style="padding:14px 28px;font-size:16px">📷 Snap & Match Now</a>
+            </div>
+
+            <!-- Simulated Scanner Interface -->
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:20px">
+              <div style="font-size:12px;font-weight:700;color:#34d399;margin-bottom:14px">AI COMPONENT DETECTION SCANNER</div>
+              
+              ${[['Arduino Uno','94%'],['Ultrasonic Sensor','88%'],['Servo Motor','91%'],['LED','97%']].map(([n,c]) => `
+                <div style="background:rgba(255,255,255,0.08);padding:10px 14px;border-radius:8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+                  <span><b>${n}</b></span>
+                  <span class="pill gn" style="margin:0">${c} Likely</span>
+                </div>
+              `).join('')}
+
+              <div class="subtle" style="color:#a7f3d0;margin-top:12px;text-align:center">AI-assisted detection · Verify detected components before adding</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+// Route: Snap & Match (Refactored AI Flow)
+async function snap() {
+  $('#app').innerHTML = `
+    <div class="wrap s" style="padding-top:40px">
+      <h2>Show Us Your E-Waste.</h2>
+      <p class="mu" style="font-size:1.1rem">Upload a photo of your electronic components and discover what they could become.</p>
+
+      <div class="two" style="margin-top:24px">
+        <div class="card">
+          <h3>Upload Component Image</h3>
+          
+          <div class="dropzone" id="dz-area">
+            <svg style="width:40px;height:40px;fill:var(--e);margin-bottom:12px" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+            <div style="font-weight:700;font-size:16px;color:var(--tx)">Drop component image here</div>
+            <div class="subtle" style="margin:6px 0 14px">Supports JPG, PNG, WEBP (Max 10 MB)</div>
+            <button class="btn btn-secondary btn-sm" onclick="$('#file-input').click()">Choose Image File</button>
+            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" style="display:none">
+          </div>
+
+          <div id="img-details" style="margin-top:16px;display:none;background:#f8fafc;padding:12px 16px;border-radius:10px;border:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:12px">
+              <img id="prev-img" style="width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--border)">
+              <div style="flex:1;overflow:hidden">
+                <b id="file-name" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">filename.png</b>
+                <span class="subtle" id="file-size">0 KB</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+            <button class="btn btn-primary" id="scan-ai-btn" disabled style="flex:1">🔍 Scan Image with AI</button>
+            <button class="btn btn-secondary" id="demo-offline-btn">⚡ Try Demo Recognition (Offline)</button>
+          </div>
+          <p class="note" style="margin-top:14px">
+            * Note: AI vision analysis processes the uploaded image. Please review and verify all detected components before adding.
+          </p>
+        </div>
+
+        <div class="card" id="results-card">
+          <h3>Detection Results</h3>
+          <div id="detect-output">
+            <div class="empty" style="padding:40px 10px">
+              <svg style="width:48px;height:48px;fill:var(--tx-subtle);margin-bottom:12px" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <div style="font-weight:600;color:var(--tx)">No Component Scan Performed Yet</div>
+              <p class="subtle" style="margin-top:4px">Upload a component image and click "Scan Image with AI", or click "Try Demo Recognition (Offline)".</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  let uploadedB64 = null;
+  const fileInput = $('#file-input');
+  const dropzone = $('#dz-area');
+
+  const handleFileSelect = (file) => {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) return toast('Please select an image file (JPG, PNG, WEBP)', true);
+    if (file.size > 10 * 1024 * 1024) return toast('Image size exceeds 10 MB limit', true);
+
+    const reader = new FileReader();
+    reader.onload = ev => {
+      uploadedB64 = ev.target.result;
+      $('#prev-img').src = uploadedB64;
+      $('#file-name').textContent = file.name;
+      $('#file-size').textContent = (file.size / 1024 >= 1000 ? (file.size / (1024*1024)).toFixed(2) + ' MB' : (file.size / 1024).toFixed(1) + ' KB');
+      $('#img-details').style.display = 'block';
+      $('#scan-ai-btn').disabled = false;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  fileInput.onchange = e => handleFileSelect(e.target.files[0]);
+  
+  dropzone.ondragover = e => { e.preventDefault(); dropzone.classList.add('dragover'); };
+  dropzone.ondragleave = () => dropzone.classList.remove('dragover');
+  dropzone.ondrop = e => {
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) handleFileSelect(e.dataTransfer.files[0]);
+  };
+
+  const runDetection = async (isDemo = false) => {
+    if (!isDemo && !uploadedB64) return toast('Select an image file first', true);
+
+    $('#detect-output').innerHTML = `
+      <div style="padding:28px 10px">
+        <div class="spinner" style="margin:0 auto 16px;border-top-color:var(--g-dark)"></div>
+        <div style="font-size:16px;font-weight:700;color:var(--tx);text-align:center" id="scan-status-text">Analyzing image data…</div>
+        <div style="margin-top:16px;display:grid;gap:8px;font-size:13px;color:var(--tx-muted)">
+          <div id="st-1">✓ 1. Validating image file payload</div>
+          <div id="st-2">● 2. Running AI Vision feature extraction…</div>
+          <div id="st-3">○ 3. Matching catalog components</div>
+          <div id="st-4">○ 4. Verification and confidence scoring</div>
+        </div>
+      </div>
+    `;
+
+    setTimeout(() => { if($('#st-2')) $('#st-2').innerHTML = '✓ 2. AI Vision extraction complete'; if($('#st-3')) $('#st-3').innerHTML = '● 3. Matching catalog components…'; }, 500);
+    setTimeout(() => { if($('#st-3')) $('#st-3').innerHTML = '✓ 3. Component catalog matched'; if($('#st-4')) $('#st-4').innerHTML = '● 4. Computing confidence levels…'; }, 900);
+
+    try {
+      const payload = isDemo ? { mode: 'demo' } : { image_b64: uploadedB64 };
+      const res = await api('/snap-match', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+      
+      let html = '';
+
+      if (res.mode === 'no_key') {
+        html = `
+          <div style="background:var(--am-bg);border:1px solid var(--am-border);border-radius:10px;padding:16px;margin-bottom:16px">
+            <b style="color:var(--am);display:block;margin-bottom:4px">⚠️ AI Vision Temporarily Unavailable</b>
+            <p class="subtle" style="margin:0;color:#78350f">AI Vision is temporarily unavailable. Please use Demo Recognition.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-secondary btn-sm" id="fallback-demo-btn">⚡ Try Demo Recognition (Offline)</button>
+            <a class="btn btn-primary btn-sm" href="#/inventory">Add Components Manually</a>
+          </div>
+        `;
+      } else if (res.detected.length === 0) {
+        html = `
+          <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:16px;margin-bottom:16px">
+            <b style="color:var(--rd);display:block;margin-bottom:4px">📷 No Components Detected</b>
+            <p class="subtle" style="margin:0;color:#991b1b">${esc(res.message)}</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-secondary btn-sm" id="fallback-demo-btn">⚡ Try Demo Recognition (Offline)</button>
+            <a class="btn btn-primary btn-sm" href="#/inventory">Add Components Manually</a>
+          </div>
+        `;
+      } else {
+        const isDemoMode = (res.mode === 'demo');
+        html = `
+          <div class="top-row" style="margin-bottom:12px">
+            <div>
+              <span class="status-badge ${isDemoMode ? 'almost' : 'ready'}">${isDemoMode ? 'SIMULATED DEMO — NOT AI ANALYSIS' : 'AI VISION MATCH'}</span>
+              <h4 style="margin-top:6px;font-size:16px">${isDemoMode ? 'Predefined Sample Components' : 'Components Identified in Photo'}</h4>
+            </div>
+            <span class="subtle">${res.detected.length} items</span>
+          </div>
+
+          <p class="subtle" style="margin-bottom:14px;color:var(--tx-muted)">${esc(res.message)}</p>
+
+          <div style="display:grid;gap:10px;margin-bottom:20px">
+            ${res.detected.map((item, idx) => {
+              const confLabel = item.confidence >= 90 ? 'High confidence' : item.confidence >= 70 ? 'Likely' : 'Possible';
+              const confClass = item.confidence >= 90 ? 'gn' : item.confidence >= 70 ? 'p' : 'm';
+              return `
+                <label style="display:flex;align-items:flex-start;justify-content:space-between;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:#f8fafc;cursor:pointer">
+                  <div style="display:flex;align-items:flex-start;gap:12px">
+                    <input type="checkbox" checked value="${item.component_id}" data-idx="${idx}" style="width:18px;height:18px;accent-color:var(--e);margin-top:2px">
+                    <div>
+                      <b style="font-size:15px">${esc(item.name)}</b>
+                      <div class="subtle">${esc(item.category)}</div>
+                      ${item.reason ? `<div style="font-size:12px;color:var(--tx-muted);margin-top:4px"><i>Reason: ${esc(item.reason)}</i></div>` : ''}
+                    </div>
+                  </div>
+                  <span class="pill ${confClass}">${confLabel} ${item.confidence}%</span>
+                </label>
+              `;
+            }).join('')}
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-primary" id="add-snap-btn" style="flex:1">ADD SELECTED COMPONENTS TO INVENTORY →</button>
+          </div>
+        `;
+      }
+
+      $('#detect-output').innerHTML = html;
+
+      if ($('#fallback-demo-btn')) {
+        $('#fallback-demo-btn').onclick = () => runDetection(true);
+      }
+
+      if ($('#add-snap-btn')) {
+        $('#add-snap-btn').onclick = async () => {
+          const checked = $$('#detect-output input[type="checkbox"]:checked');
+          if (!checked.length) return toast('Select at least one detected component', true);
+          for (let ck of checked) {
+            await api('/inventory', {
+              method: 'POST',
+              body: JSON.stringify({ component_id: +ck.value, quantity: 1, condition: 'Working' })
+            });
+          }
+          toast(`${checked.length} component(s) added to inventory!`);
+          findMyProjectsTransition();
+        };
+      }
+
+    } catch (err) {
+      $('#detect-output').innerHTML = `
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:16px;margin-bottom:16px">
+          <b style="color:var(--rd)">AI Processing Failed</b>
+          <p class="subtle" style="margin:4px 0 0;color:#991b1b">${esc(err.message)}</p>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="fallback-demo-btn">⚡ Try Demo Recognition (Offline)</button>
+      `;
+      if ($('#fallback-demo-btn')) {
+        $('#fallback-demo-btn').onclick = () => runDetection(true);
+      }
+    }
+  };
+
+  $('#scan-ai-btn').onclick = () => runDetection(false);
+  $('#demo-offline-btn').onclick = () => runDetection(true);
+}
+
+// Route: Inventory Page
+async function inventory() {
+  const [componentsList, userInv] = await Promise.all([api('/components'), api('/inventory')]);
+  const totalWeightG = userInv.reduce((acc, item) => acc + (item.quantity * item.estimated_weight_grams), 0);
+  const totalUnits = userInv.reduce((acc, item) => acc + item.quantity, 0);
+
+  $('#app').innerHTML = `
+    <div class="wrap s" style="padding-top:40px">
+      <div class="top-row">
+        <div>
+          <h2>My Electronic Components</h2>
+          <p class="mu">Manage microcontrollers, sensors, actuators, or salvaged hardware from your drawers.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn btn-ai btn-sm" href="#/snap">📷 Snap Photo (AI)</a>
+          <button class="btn btn-secondary btn-sm" id="demo-btn">⚡ Load Dustbin/Alarm Kit</button>
+          <button class="btn btn-secondary btn-sm" id="iot-btn">🌱 Load IoT Kit</button>
+          <button class="btn btn-secondary btn-sm" id="salvaged-btn">♻️ Load Salvaged Kit</button>
+          <button class="btn btn-dng btn-sm" id="clear-btn" ${userInv.length ? '' : 'disabled'}>Clear All</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <h3>Add Component to Inventory</h3>
+        <div class="form">
+          <label>Filter List
+            <input id="q-filter" placeholder="e.g. servo, sensor">
+          </label>
+          <label>Select Component
+            <select id="comp-select"></select>
+          </label>
+          <label>Quantity
+            <input id="comp-qty" type="number" min="1" max="1000" value="1">
+          </label>
+          <label>Condition
+            <select id="comp-cond">
+              <option value="Working">Working</option>
+              <option value="Partially Working">Partially Working</option>
+              <option value="Unknown">Unknown</option>
+            </select>
+          </label>
+          <button class="btn btn-primary" id="add-btn">Add Component</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:24px">
+        <div class="top-row">
+          <h3>Current Inventory (${userInv.length} types · ${totalUnits} units)</h3>
+          ${userInv.length ? `<span class="pill gn">Est. Material: ${formatKg(Math.round(totalWeightG))}</span>` : ''}
+        </div>
+        
+        ${userInv.length ? `
+          <div style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                  <th>Condition</th>
+                  <th>Weight (Est)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${userInv.map(item => `
+                  <tr>
+                    <td><b>${esc(item.name)}</b></td>
+                    <td><span class="pill">${esc(item.category)}</span></td>
+                    <td>
+                      <input type="number" min="1" max="1000" value="${item.quantity}" style="width:80px" data-q-id="${item.id}">
+                    </td>
+                    <td>
+                      <select style="padding:6px 10px;font-size:13px;width:140px" data-c-id="${item.id}">
+                        <option value="Working" ${item.condition==='Working'?'selected':''}>Working</option>
+                        <option value="Partially Working" ${item.condition==='Partially Working'?'selected':''}>Partially Working</option>
+                        <option value="Unknown" ${item.condition==='Unknown'?'selected':''}>Unknown</option>
+                      </select>
+                    </td>
+                    <td class="mu">${item.quantity * item.estimated_weight_grams} g</td>
+                    <td>
+                      <button class="btn btn-dng btn-sm" data-del-id="${item.id}">Delete</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div class="top-row" style="margin-top:24px">
+            <span class="mu">Saved automatically in SQLite database.</span>
+            <button class="btn btn-primary" onclick="findMyProjectsTransition()" style="padding:12px 28px">Find My Projects →</button>
+          </div>
+        ` : `
+          <div class="empty">
+            <h3>No components in inventory yet</h3>
+            <p>Select components above, scan using AI, or click a demo kit button to start!</p>
+          </div>
+        `}
+      </div>
+    </div>
+  `;
+
+  const updateSelect = () => {
+    const filterText = $('#q-filter').value.toLowerCase();
+    const filtered = componentsList.filter(c => c.name.toLowerCase().includes(filterText) || c.category.toLowerCase().includes(filterText));
+    $('#comp-select').innerHTML = filtered.map(c => `<option value="${c.id}">${esc(c.name)} (${esc(c.category)})</option>`).join('');
+  };
+  updateSelect();
+  $('#q-filter').oninput = updateSelect;
+
+  const handleAction = async (fn, successMsg) => {
+    try {
+      await fn();
+      toast(successMsg);
+      await inventory();
+    } catch (e) {
+      toast(e.message, true);
+    }
+  };
+
+  $('#add-btn').onclick = () => {
+    const cid = +$('#comp-select').value;
+    const qty = +$('#comp-qty').value;
+    const cond = $('#comp-cond').value;
+    if (!cid) return toast('Please select a component', true);
+    if (!Number.isInteger(qty) || qty < 1 || qty > 1000) return toast('Quantity must be between 1 and 1000', true);
+    handleAction(() => api('/inventory', {
+      method: 'POST',
+      body: JSON.stringify({ component_id: cid, quantity: qty, condition: cond })
+    }), 'Component added to inventory');
+  };
+
+  $('#demo-btn').onclick = () => handleAction(() => api('/inventory/demo?kit=default', { method: 'POST' }), 'Default demo kit loaded');
+  $('#iot-btn').onclick = () => handleAction(() => api('/inventory/demo?kit=iot', { method: 'POST' }), 'IoT plant kit loaded');
+  $('#salvaged-btn').onclick = () => handleAction(() => api('/inventory/demo?kit=salvaged', { method: 'POST' }), 'Salvaged tech kit loaded');
+  
+  if ($('#clear-btn')) {
+    $('#clear-btn').onclick = () => handleAction(() => api('/inventory', { method: 'DELETE' }), 'Inventory cleared');
+  }
+
+  $$('[data-del-id]').forEach(b => {
+    b.onclick = () => handleAction(() => api('/inventory/' + b.dataset.delId, { method: 'DELETE' }), 'Component removed');
+  });
+
+  $$('[data-q-id]').forEach(input => {
+    input.onchange = () => {
+      const val = +input.value;
+      if (!Number.isInteger(val) || val < 1 || val > 1000) {
+        toast('Quantity must be between 1 and 1000', true);
+        return inventory();
+      }
+      handleAction(() => api('/inventory/' + input.dataset.qId, {
+        method: 'PUT',
+        body: JSON.stringify({ quantity: val })
+      }), 'Quantity updated');
+    };
+  });
+
+  $$('[data-c-id]').forEach(select => {
+    select.onchange = () => {
+      const cond = select.value;
+      const itemId = select.dataset.cId;
+      const input = $(`[data-q-id="${itemId}"]`);
+      const qty = +input.value;
+      handleAction(() => api('/inventory/' + itemId, {
+        method: 'PUT',
+        body: JSON.stringify({ quantity: qty, condition: cond })
+      }), 'Condition updated');
+    };
+  });
+}
+
+// Route: Recommendations Page (Main Application WOW Moment)
+async function results() {
+  const [recs, inv] = await Promise.all([api('/recommendations'), api('/inventory')]);
+
+  if (!inv.length) {
+    const allProjects = await api('/projects');
+    $('#app').innerHTML = `
+      <div class="wrap s" style="padding-top:40px">
+        <div class="card empty">
+          <h2>Project Catalog (${allProjects.length} projects)</h2>
+          <p class="mu">Add components to your inventory to calculate feasibility scores and see what you can build.</p>
+          <p><a class="btn btn-primary" href="#/inventory">Add Components Now</a></p>
+        </div>
+        <div class="grid" style="margin-top:24px">
+          ${allProjects.map(p => `
+            <div class="card link" onclick="location.hash='#/project/${p.id}'">
+              <span class="pill">${esc(p.difficulty)}</span>
+              <h3 style="margin-top:8px">${esc(p.name)}</h3>
+              <p class="mu">${esc(p.description)}</p>
+              <p class="mu" style="font-size:13px;margin-top:8px"><b>Needs:</b> ${p.components.map(esc).join(', ')}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const totalWeightG = inv.reduce((acc, item) => acc + (item.quantity * item.estimated_weight_grams), 0);
+  const totalUnits = inv.reduce((acc, item) => acc + item.quantity, 0);
+
+  let activeTab = 'all';
+  let searchText = '';
+
+  const renderCards = () => {
+    let list = recs;
+    if (activeTab === '100') list = list.filter(r => r.score === 100);
+    else if (activeTab === 'almost') list = list.filter(r => r.score >= 70 && r.score < 100);
+    else if (activeTab === 'partial') list = list.filter(r => r.score < 70);
+
+    if (searchText) {
+      const q = searchText.toLowerCase();
+      list = list.filter(r => r.name.toLowerCase().includes(q) || r.summary.toLowerCase().includes(q) || r.requirements.some(req => req.name.toLowerCase().includes(q)));
+    }
+
+    const readyCount = recs.filter(r => r.score === 100).length;
+    const almostCount = recs.filter(r => r.score >= 70 && r.score < 100).length;
+
+    $('#app').innerHTML = `
+      <div class="wrap s" style="padding-top:40px">
+        <div style="margin-bottom:24px">
+          <h2>Your Second-Life Opportunities</h2>
+          <p class="mu">Projects you can build from the components you already have in your drawers.</p>
+
+          <!-- Top Compact Inventory Summary Bar -->
+          <div style="background:var(--g-dark);color:#fff;border-radius:12px;padding:14px 20px;margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+            <div>
+              <span style="color:#a7f3d0;font-size:12px;font-weight:700;letter-spacing:0.05em">YOUR INVENTORY SUMMARY</span>
+              <div style="font-size:16px;font-weight:700;margin-top:2px">
+                ${inv.length} component types · ${totalUnits} units · ${formatKg(totalWeightG)} material
+              </div>
+            </div>
+            <a class="btn btn-secondary btn-sm" href="#/inventory">Edit Inventory</a>
+          </div>
+        </div>
+
+        <div class="badge-bar">
+          <button class="tab-btn ${activeTab==='all'?'on':''}" data-tab="all">All Matches (${recs.length})</button>
+          <button class="tab-btn ${activeTab==='100'?'on':''}" data-tab="100">READY TO BUILD (${readyCount})</button>
+          <button class="tab-btn ${activeTab==='almost'?'on':''}" data-tab="almost">ALMOST THERE (${almostCount})</button>
+          <button class="tab-btn ${activeTab==='partial'?'on':''}" data-tab="partial">PARTIAL MATCHES</button>
+        </div>
+
+        <div style="margin-bottom:24px">
+          <input id="search-recs" placeholder="🔍 Search matched projects or required parts..." value="${esc(searchText)}">
+        </div>
+
+        ${list.length ? `
+          <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+            ${list.map((item) => {
+              const badgeClass = item.score === 100 ? 'ready' : item.score >= 70 ? 'almost' : 'partial';
+              const badgeLabel = item.completion_status || (item.score === 100 ? 'READY TO BUILD' : item.score >= 70 ? 'ALMOST THERE' : 'PARTIAL MATCH');
+              const missingParts = item.requirements.filter(r => r.status !== 'full');
+              return `
+              <div class="card link" onclick="location.hash='#/project/${item.id}'">
+                <div class="top-row">
+                  <div>
+                    <span class="status-badge ${badgeClass}">${badgeLabel}</span>
+                    <span class="pill" style="margin-left:4px">${esc(item.difficulty)}</span>
+                  </div>
+                  <div class="score">${item.score}%</div>
+                </div>
+
+                ${renderBar(item.score)}
+
+                <h3 style="margin-top:12px;font-size:18px">${esc(item.name)}</h3>
+                <p class="mu" style="margin-bottom:12px">${esc(item.summary)}</p>
+
+                <!-- Dynamic Why This Project Section -->
+                <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13px">
+                  <b style="color:var(--g-dark);display:block;margin-bottom:4px">Why this project?</b>
+                  <ul style="margin:0;padding-left:18px;color:var(--tx-muted)">
+                    ${(item.why_recommended || []).map(w => `<li>${esc(w)}</li>`).join('')}
+                  </ul>
+                </div>
+
+                <!-- Almost There Highlight -->
+                ${item.score >= 70 && item.score < 100 ? `
+                  <div style="background:var(--am-bg);border:1px solid var(--am-border);border-radius:10px;padding:12px;margin-bottom:12px;font-size:13px">
+                    <b style="color:var(--am)">You're almost there!</b><br>
+                    Missing: ${missingParts.map(m => `<b>${esc(m.name)}</b> (x${m.required - m.available})`).join(', ')}<br>
+                    Est. additional cost: <b>${formatInr(item.additional_cost)}</b>
+                  </div>
+                ` : ''}
+
+                <div class="top-row mu" style="font-size:13px;border-top:1px solid var(--border);padding-top:12px">
+                  <span>♻️ ${formatKg(item.waste_reused_g)} reused</span>
+                  <span>💰 ${item.additional_cost > 0 ? 'Cost: ' + formatInr(item.additional_cost) : 'Ready! ₹0 cost'}</span>
+                </div>
+                
+                <div style="margin-top:14px">
+                  <button class="btn ${item.score === 100 ? 'btn-primary' : 'btn-secondary'} btn-sm" style="width:100%">${item.score === 100 ? 'START BUILDING →' : item.score >= 70 ? 'SEE WHAT I NEED →' : 'VIEW DETAILS →'}</button>
+                </div>
+              </div>
+            `;}).join('')}
+          </div>
+        ` : `
+          <div class="card empty">
+            <h3>No projects found matching current filter</h3>
+            <p class="mu">Try clearing the search query or tab filter.</p>
+          </div>
+        `}
+      </div>
+    `;
+
+    $$('.tab-btn').forEach(btn => {
+      btn.onclick = () => {
+        activeTab = btn.dataset.tab;
+        renderCards();
+      };
+    });
+
+    const searchInput = $('#search-recs');
+    if (searchInput) {
+      searchInput.focus();
+      searchInput.selectionStart = searchInput.selectionEnd = searchText.length;
+      searchInput.oninput = () => {
+        searchText = searchInput.value;
+        renderCards();
+      };
+    }
+  };
+
+  renderCards();
+}
+
+// Route: Project Details Page
+async function project(id) {
+  const data = await api('/projects/' + id);
+  const m = data.match;
+
+  const ckKey = 'sl_steps_' + id;
+  let savedSteps = {};
+  try { savedSteps = JSON.parse(localStorage.getItem(ckKey) || '{}'); } catch {}
+
+  const completedCount = Object.values(savedSteps).filter(Boolean).length;
+  const badgeClass = m.score === 100 ? 'ready' : m.score >= 70 ? 'almost' : 'partial';
+
+  $('#app').innerHTML = `
+    <div class="wrap s" style="padding-top:40px">
+      <a href="#/results" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;margin-bottom:16px">← Back to recommendations</a>
+
+      <div class="card">
+        <div class="top-row">
+          <div>
+            <span class="status-badge ${badgeClass}">${m.completion_status}</span>
+            <span class="pill" style="margin-left:6px">${esc(data.difficulty)}</span>
+            <h2 style="margin-top:10px;font-size:2rem">${esc(data.name)}</h2>
+          </div>
+          <div style="text-align:right">
+            <div class="score">${m.score}%</div>
+            <span class="subtle">Feasibility Score</span>
+          </div>
+        </div>
+        <p style="font-size:1.1rem;margin-top:12px;color:var(--tx-muted)">${esc(data.description)}</p>
+      </div>
+
+      <div class="two" style="margin-top:20px">
+        <div class="card">
+          <h3>Why Recommended?</h3>
+          ${renderBar(m.score)}
+          <p style="margin-top:10px">${esc(m.summary)}</p>
+
+          <div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:14px;font-size:13px">
+            <b style="color:var(--g-dark)">Match Intelligence:</b>
+            <ul style="margin:6px 0 0;padding-left:18px;color:var(--tx-muted)">
+              ${(m.why_recommended || []).map(w => `<li>${esc(w)}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Impact & Cost Estimates</h3>
+          <p>E-waste reused: <b>${formatKg(m.waste_reused_g)}</b> <span class="subtle">(Full project weight: ${formatKg(Math.round(data.estimated_waste_reuse_grams))})</span></p>
+          <p>Full components cost: <b>${formatInr(data.estimated_cost)}</b></p>
+          <p>Additional cost for you: <b>${formatInr(m.additional_cost)}</b> ${m.additional_cost===0?'<span class="pill gn">✓ Nothing to buy</span>':''}</p>
+          <p class="note">All metrics are approximations based on average component weights & prices.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:24px">
+        <h3>Component Requirements & Availability</h3>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Category</th>
+                <th>Required</th>
+                <th>Available</th>
+                <th>Fulfillment</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${m.requirements.map(r => `
+                <tr>
+                  <td><b>${esc(r.name)}</b></td>
+                  <td class="mu">${esc(r.category)}</td>
+                  <td>${r.required}</td>
+                  <td>${r.available}</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:8px">
+                      <div class="bar" style="width:70px;margin:0"><i style="width:${r.fulfillment}%"></i></div>
+                      <span>${r.fulfillment}%</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="pill ${r.status==='full'?'gn':r.status==='partial'?'p':'m'}">
+                      ${r.status==='full'?'Available':r.status==='partial'?'Partially Available':'Missing'}
+                    </span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="two" style="margin-top:24px">
+        <div class="card">
+          <div class="top-row">
+            <h3>Interactive Assembly Checklist</h3>
+            <span class="pill gn" id="step-prog-badge">${completedCount} / ${data.build_steps.length} steps complete</span>
+          </div>
+          <p class="mu" style="margin-bottom:12px">Track your progress during assembly:</p>
+          <div id="step-list">
+            ${data.build_steps.map((step, idx) => `
+              <div class="step-item">
+                <input type="checkbox" id="step-${idx}" ${savedSteps[idx] ? 'checked' : ''} data-step-idx="${idx}">
+                <label for="step-${idx}" style="${savedSteps[idx] ? 'text-decoration:line-through;color:var(--tx-subtle)' : ''}"><b>0${idx + 1}.</b> ${esc(step)}</label>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="safety-box">
+            <h4>🛡️ Safety First</h4>
+            <p style="font-size:13px;margin:0;color:#92400e">
+              Designed for low-voltage educational projects (5V–12V DC). Do not work with mains voltage (110V/230V AC) or damaged lithium batteries.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3>Educational & Practical Value</h3>
+            <p>${esc(data.educational_value)}</p>
+
+            <h3 style="margin-top:24px">Sustainability Impact</h3>
+            <p>Building this project keeps approximately <b>${formatKg(m.waste_reused_g)}</b> of electronic material in circular use instead of sitting idle or being landfilled.</p>
+          </div>
+
+          <!-- Contextual SecondLife AI Assistant Card -->
+          <div class="card" id="ai-assistant-card" style="margin-top:20px;border:1px solid #10b981;background:#f0fdf4">
+            <div class="top-row" style="margin-bottom:12px">
+              <div>
+                <h3 style="margin:0;font-size:16px;color:var(--g-dark)">🤖 SecondLife AI Assistant</h3>
+                <p class="subtle" style="margin:2px 0 0;color:var(--tx-muted)">Ask me about this project or your components.</p>
+              </div>
+              <span class="pill gn">Contextual AI</span>
+            </div>
+
+            <!-- Quick Action Suggestion Buttons -->
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px" id="chat-quick-actions">
+              <button class="btn btn-secondary btn-sm chat-q-btn" data-q="Why this project?">Why this project?</button>
+              <button class="btn btn-secondary btn-sm chat-q-btn" data-q="What am I missing?">What am I missing?</button>
+              <button class="btn btn-secondary btn-sm chat-q-btn" data-q="How does it work?">How does it work?</button>
+              <button class="btn btn-secondary btn-sm chat-q-btn" data-q="Explain the components">Explain components</button>
+            </div>
+
+            <!-- Chat Log Box -->
+            <div id="chat-box" style="height:210px;max-height:240px;overflow-y:auto;background:#ffffff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px">
+              <div class="chat-msg bot" style="background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.4">
+                <b>SecondLife AI Assistant:</b> Hello! Ask me any questions about <b>${esc(data.name)}</b>, your component match status, missing parts, assembly steps, or potential alternatives.
+              </div>
+            </div>
+
+            <!-- Chat Input Group -->
+            <div style="display:flex;gap:8px">
+              <input type="text" id="chat-input" placeholder="Ask about this project or components..." style="flex:1;font-size:13px">
+              <button class="btn btn-primary btn-sm" id="chat-send-btn">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  $$('#step-list input[type="checkbox"]').forEach(ck => {
+    ck.onchange = () => {
+      const idx = ck.dataset.stepIdx;
+      savedSteps[idx] = ck.checked;
+      localStorage.setItem(ckKey, JSON.stringify(savedSteps));
+      const label = $(`label[for="step-${idx}"]`);
+      if (ck.checked) {
+        label.style.textDecoration = 'line-through';
+        label.style.color = 'var(--tx-subtle)';
+      } else {
+        label.style.textDecoration = 'none';
+        label.style.color = 'var(--tx)';
+      }
+      const curComp = Object.values(savedSteps).filter(Boolean).length;
+      $('#step-prog-badge').textContent = `${curComp} / ${data.build_steps.length} steps complete`;
+    };
+  });
+
+  // Chatbot event handlers
+  const chatBox = $('#chat-box');
+  const chatInput = $('#chat-input');
+  const sendBtn = $('#chat-send-btn');
+
+  const sendChatMessage = async (msgText) => {
+    const q = (msgText || chatInput.value).trim();
+    if (!q) return;
+    chatInput.value = '';
+
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chat-msg user';
+    userDiv.style.cssText = 'background:#f1f5f9;border:1px solid #cbd5e1;color:#1e293b;padding:8px 12px;border-radius:10px;font-size:13px;align-self:flex-end;max-width:85%';
+    userDiv.innerHTML = `<b>You:</b> ${esc(q)}`;
+    chatBox.append(userDiv);
+
+    const loadDiv = document.createElement('div');
+    loadDiv.id = 'chat-loading';
+    loadDiv.className = 'chat-msg bot';
+    loadDiv.style.cssText = 'background:#ecfdf5;border:1px solid #a7f3d0;color:#047857;padding:8px 12px;border-radius:10px;font-size:13px';
+    loadDiv.innerHTML = `<i>Thinking… analyzing project context</i>`;
+    chatBox.append(loadDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+      const res = await api('/chat', {
+        method: 'POST',
+        body: JSON.stringify({ message: q, project_id: id })
+      });
+      loadDiv.remove();
+
+      const botDiv = document.createElement('div');
+      botDiv.className = 'chat-msg bot' + (res.ok ? '' : ' err');
+      botDiv.style.cssText = res.ok
+        ? 'background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;padding:10px 12px;border-radius:10px;font-size:13px;line-height:1.4'
+        : 'background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:10px 12px;border-radius:10px;font-size:13px';
+      
+      botDiv.innerHTML = `<b>SecondLife AI Assistant:</b> ${esc(res.reply).replace(/\n/g, '<br>')}`;
+      chatBox.append(botDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (e) {
+      loadDiv.remove();
+      const errDiv = document.createElement('div');
+      errDiv.className = 'chat-msg bot err';
+      errDiv.style.cssText = 'background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:10px 12px;border-radius:10px;font-size:13px';
+      errDiv.innerHTML = `<b>SecondLife AI Assistant:</b> AI Assistant is temporarily unavailable. You can still use SecondLife's project matching and inventory features.`;
+      chatBox.append(errDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  };
+
+  if (sendBtn) sendBtn.onclick = () => sendChatMessage();
+  if (chatInput) chatInput.onkeydown = e => { if (e.key === 'Enter') sendChatMessage(); };
+  $$('.chat-q-btn').forEach(btn => {
+    btn.onclick = () => sendChatMessage(btn.dataset.q);
+  });
+}
+
+// Route: Dashboard & Impact Simulator
+async function dashboard() {
+  const d = await api('/dashboard');
+
+  if (!d.total_units) {
+    $('#app').innerHTML = `
+      <div class="wrap s" style="padding-top:40px">
+        <div class="card empty">
+          <h2>No Sustainability Impact Data Yet</h2>
+          <p class="mu">Add components to your inventory to calculate e-waste reduction stats.</p>
+          <p><a class="btn btn-primary" href="#/inventory">Add Components</a></p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const categories = Object.entries(d.categories).sort((a, b) => b[1] - a[1]);
+  const maxCatCount = Math.max(...categories.map(c => c[1]));
+
+  let scaleFactor = 1000;
+
+  const renderDashboard = () => {
+    const projectedUsers = scaleFactor;
+    const projectedWasteG = d.waste_diverted_g * projectedUsers;
+    const projectedProjects = d.projects_matched * projectedUsers;
+    const projectedUnits = d.units_reusable * projectedUsers;
+
+    $('#app').innerHTML = `
+      <div class="wrap s" style="padding-top:40px">
+        <h2>Your Second-Life Impact</h2>
+        <p class="mu">Every reused component is one less component heading toward disposal.</p>
+
+        <!-- Main Impact Metrics -->
+        <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); margin-top:24px">
+          <div class="card">
+            <div class="score">${d.total_units}</div>
+            <div class="mu">Components Rescued</div>
+          </div>
+          <div class="card">
+            <div class="score">${d.projects_matched}</div>
+            <div class="mu">Projects Enabled</div>
+          </div>
+          <div class="card">
+            <div class="score" style="color:var(--gn)">${d.ready_to_build}</div>
+            <div class="mu">Ready to Build</div>
+          </div>
+          <div class="card">
+            <div class="score">${d.units_reusable}</div>
+            <div class="mu">Units Reusable</div>
+          </div>
+          <div class="card">
+            <div class="score" style="color:var(--e)">${formatKg(d.waste_diverted_g)}</div>
+            <div class="mu">E-Waste Diverted (Est)</div>
+          </div>
+        </div>
+
+        <!-- Scale Impact Simulator -->
+        <div class="card" style="margin-top:28px;background:linear-gradient(135deg, #072219 0%, #0d3c2e 100%);color:#fff;padding:32px">
+          <div class="top-row">
+            <div>
+              <div class="eyebrow" style="background:rgba(255,255,255,0.1);color:#34d399;border-color:rgba(255,255,255,0.2)">
+                IMPACT SIMULATOR
+              </div>
+              <h2 style="color:#fff;margin-top:4px">What if Second Life scaled?</h2>
+            </div>
+            <div class="badge-bar" style="margin:0">
+              ${[10, 100, 1000, 10000].map(s => `
+                <button class="tab-btn ${scaleFactor===s?'on':''}" data-scale="${s}" style="${scaleFactor===s?'background:#34d399;color:#072219':''}">${s.toLocaleString()} Makers</button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); margin-top:24px">
+            <div style="background:rgba(255,255,255,0.08);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.15)">
+              <div style="font-size:2.4rem;font-weight:800;color:#34d399">${formatKg(projectedWasteG)}</div>
+              <div style="color:#a7f3d0;font-size:14px;margin-top:4px">Potential E-Waste Diverted</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.08);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.15)">
+              <div style="font-size:2.4rem;font-weight:800;color:#fff">${projectedProjects.toLocaleString()}</div>
+              <div style="color:#a7f3d0;font-size:14px;margin-top:4px">Reuse Projects Enabled</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.08);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.15)">
+              <div style="font-size:2.4rem;font-weight:800;color:#34d399">${projectedUnits.toLocaleString()}</div>
+              <div style="color:#a7f3d0;font-size:14px;margin-top:4px">Components Kept in Use</div>
+            </div>
+          </div>
+
+          <p class="note" style="color:#a7f3d0;margin-top:20px">
+            * Illustrative projection based on current demo impact. Actual environmental savings vary by specific hardware components and build projects.
+          </p>
+        </div>
+
+        <div class="two" style="margin-top:28px">
+          <div class="card">
+            <h3>Top Project Feasibility Matches</h3>
+            ${d.top_projects.map(p => `
+              <div style="margin:14px 0">
+                <div class="top-row">
+                  <span><b>${esc(p.name)}</b></span>
+                  <span class="score" style="font-size:18px">${p.score}%</span>
+                </div>
+                ${renderBar(p.score)}
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="card">
+            <h3>Inventory Breakdown by Category</h3>
+            ${categories.map(([catName, count]) => `
+              <div style="margin:14px 0">
+                <div class="top-row">
+                  <span><b>${esc(catName)}</b></span>
+                  <span class="mu">${count} units</span>
+                </div>
+                <div class="bar">
+                  <i style="width:${(count / maxCatCount) * 100}%"></i>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+
+    $$('[data-scale]').forEach(btn => {
+      btn.onclick = () => {
+        scaleFactor = +btn.dataset.scale;
+        renderDashboard();
+      };
+    });
+  };
+
+  renderDashboard();
+}
+
+// Router
+const routes = { home, snap, inventory, results, dashboard };
+
+async function router() {
+  const hashParts = location.hash.replace('#/', '').split('/');
+  const routeName = hashParts[0] || 'home';
+
+  $$('nav a.nav-link').forEach(a => {
+    a.classList.toggle('on', a.dataset.r === (routeName === 'project' ? 'results' : routeName));
+  });
+
+  window.scrollTo(0, 0);
+  showLoading();
+
+  try {
+    if (routeName === 'project') {
+      await project(hashParts[1]);
+    } else {
+      await (routes[routeName] || home)();
+    }
+  } catch (err) {
+    showError(err);
+  }
+}
+
+window.addEventListener('hashchange', router);
+router();
+</script>
+</body>
+</html>
